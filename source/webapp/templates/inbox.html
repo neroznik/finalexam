@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Network{% endblock %}
+
+{% block content %}
+    <h3>Полученные:</h3>
+     <hr>
+    <div class="row">
+
+    {% for msg in message %}
+
+    <div class="col-3"> <p>От: <a href="{% url 'accounts:detail' user.pk%} "> {{ msg.sender.first_name}} {{msg.sender.last_name }}</a> </p></div>
+            <div class="col-6"> <p> Дата получения: {{msg.created_at}}</p></div>
+    <div class="col-3"><p><a href="{% url 'webapp:text_message' msg.pk %}">Прочитать</a></p></div>
+
+
+        <hr>
+    {% endfor %}
+
+    </div>
+    
+{% endblock %}

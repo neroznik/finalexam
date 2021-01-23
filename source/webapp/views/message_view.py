@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, View, TemplateView, CreateView
 from django.urls import reverse
@@ -5,7 +6,7 @@ from django.urls import reverse
 from webapp.forms import MessageForm
 from webapp.models import Message
 
-class InboxView(ListView):
+class InboxView(LoginRequiredMixin, ListView):
     template_name = 'inbox.html'
     context_object_name = 'message'
     paginate_by = 10
@@ -20,7 +21,7 @@ class InboxView(ListView):
         context['message']=message
         return context
 
-class SentView(ListView):
+class SentView(LoginRequiredMixin, ListView):
     template_name = 'sent.html'
     context_object_name = 'message'
     paginate_by = 10
@@ -35,7 +36,7 @@ class SentView(ListView):
         return context
 
 
-class MessageTextView (TemplateView):
+class MessageTextView (LoginRequiredMixin, TemplateView):
     template_name = 'message.html'
 
     def get_context_data(self, **kwargs):
@@ -48,7 +49,7 @@ class MessageTextView (TemplateView):
 
 
 
-class MessageCreateView(CreateView):
+class MessageCreateView(LoginRequiredMixin, CreateView):
     template_name = 'message_add.html'
     form_class = MessageForm
 
