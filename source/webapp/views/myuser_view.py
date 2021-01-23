@@ -11,7 +11,7 @@ class IndexView(ListView):
     context_object_name = 'myuser'
     paginate_by = 10
     paginate_orphans = 0
-    model = MyUser
+    model = get_user_model()
 
 
     def get_context_data(self, *, object_list=None, **kwargs):

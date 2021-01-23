@@ -15,8 +15,9 @@ class InboxView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        message = Message.objects.filter(reciever=self.request.user)
-        context['message'] = message
+        user=self.request.user
+        message = Message.objects.filter(reciever = user.pk)
+        context['message']=message
         return context
 
 class SentView(ListView):
@@ -50,7 +51,7 @@ class MessageTextView (TemplateView):
 class MessageCreateView(CreateView):
     template_name = 'message_add.html'
     form_class = MessageForm
-    model = Message
+
 
     def form_valid(self, form):
         message = form.save(commit=False)
@@ -59,6 +60,6 @@ class MessageCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('webapp:picture_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:sent', kwargs={'pk': self.object.pk})
 
 
