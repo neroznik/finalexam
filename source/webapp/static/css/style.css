@@ -174,8 +174,8 @@ a:hover {color: #b68bb2 !important;}
 .avatar {
     display: inline-block;
     float: left;
-    width: auto;
-    height: auto;
+    width: 100px;
+    height: 150px;
     margin-right: 20px;
     margin-bottom: 20px;
 }

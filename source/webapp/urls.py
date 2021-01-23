@@ -11,6 +11,6 @@ urlpatterns = [
     path('sent/', SentView.as_view(), name='sent'),
     path('message/<int:pk>/', MessageTextView.as_view(), name='text_message'),
     path('message/add/', MessageCreateView.as_view(), name='message_create'),
-    path('friends/<int:pk>/update/', AddFriendView.as_view(), name='add_friend'),
-    path('friends/<int:pk>/delete/', DeleteFriendView.as_view(), name='delete_friend'),
+    path('friends/<int:pk>/addfr/', AddFriendView.as_view(), name='add_friend'),
+    path('friends/<int:pk>/rem_fr/', DeleteFriendView.as_view(), name='delete_friend'),
 ]
