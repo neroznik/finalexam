@@ -1,6 +1,6 @@
 
 {% extends 'base.html' %}
-
+{% load friends %}
 {% block title %}Network{% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@
              {% if user_obj.profile.avatar %}
             <img class="avatar" src="{{ user_obj.profile.avatar.url }}" width="100" height="150" alt="user picture">
                {% else %}
-            <img class="avatar" src="img/nophoto.png" width="100" height="150" alt="user picture">
+            <img class="avatar" src="/static/img/nophoto.png" width="100" height="150" alt="user picture">
              {% endif %}
             {% if request.user.is_authenticated %}
                 <p>Ник: <a href="{% url 'accounts:detail' user.pk%}">{{ user_obj.username }}</a></p>
@@ -29,12 +29,18 @@
                 <p>Имя: {{ user_obj.first_name }}</p>
                 <p>Фамилия: {{ user_obj.last_name }}</p>
 
-    {% if request.user.is_authenticated %}
-    <a class="{% if liked %}hidden{% endif %} add_friend " href="{% url 'webapp:add_friend' user_obj.pk   %}">Добваит в друзья</a>
-    <a class="{% if not liked %}hidden{% endif %} remove_friend" href="{% url 'webapp:delete_friend' user_obj.pk %}">Удалить из друзей</a>
 
-     <a href="{% url 'webapp:message_create' %}"> Написать сообщение</a>
-     {% endif %}
+
+    {% if request.user.is_authenticated %}
+    <a class=" {% if added %}hidden{% endif %} like" href="{% url 'webapp:add_friend' user_obj.pk %}">В друзья </a>
+    <a class="{% if not added %}hidden{% endif %} unlike" href="{% url 'webapp:delete_friend' user_obj.pk %}">Удалить из друзей</a>
+
+        <br>
+        <a href="{% url 'webapp:message_create' %}"> Написать сообщение</a>
+
+    {% endif %}
+
+
             </div>
 
         </div>
