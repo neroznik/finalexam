@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from webapp.models import MyUser, Message
+
+admin.site.register(MyUser)
+admin.site.register(Message)
